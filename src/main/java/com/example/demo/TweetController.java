@@ -52,9 +52,9 @@ public class TweetController {
     }
 
     @DeleteMapping("/tweet/{id}")
-    void deleteTweet(@PathVariable Long id) {
+    Tweet deleteTweet(@PathVariable Long id) {
 
-        tweets.delete(id);
+        return tweets.delete(id);
     }
 
 

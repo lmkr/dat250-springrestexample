@@ -12,7 +12,7 @@ public class TweetDAO {
     public TweetDAO() {
        counter = new AtomicLong();
        tweets = new ConcurrentHashMap<Long, Tweet>();
-       create("lars","topic","message");
+       // create("lars","topic","message");
     }
 
     public Tweet create(String author, String topic, String message) {
@@ -43,11 +43,11 @@ public class TweetDAO {
         return true; // TODO: add error handling
     }
 
-    public boolean delete(Long id) {
+    public Tweet delete(Long id) {
 
         Tweet tweet = tweets.remove(id);
 
-        return tweet != null;
+        return tweet;
     }
 
     public Collection<Tweet> all() {
