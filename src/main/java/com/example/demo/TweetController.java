@@ -1,7 +1,6 @@
 package com.example.demo;
 
 import java.util.Collection;
-import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -14,12 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TweetController {
 
-    private final TweetDAO tweets;
-
-    public TweetController() {
-        super();
-        tweets = new TweetDAO();
-    }
+    private final TweetDAO tweets = new TweetDAO();
 
     @GetMapping("/tweet")
     public Collection<Tweet> tweet() {
@@ -28,7 +22,6 @@ public class TweetController {
 
     @GetMapping("/tweet/{id}")
     public Tweet getTweet(@PathVariable Long id) {
-        // return new Tweet(counter.incrementAndGet(), "lars", "topic", String.format(template, name));
         return tweets.read(id);
     }
 
@@ -38,9 +31,7 @@ public class TweetController {
         Tweet tweet = tweets.read(id);
 
         tweet.setTopic(newTweet.getTopic());
-
         tweet.setAuthor(newTweet.getAuthor());
-
         tweet.setMessage(newTweet.getMessage());
 
         return tweet;
@@ -56,7 +47,4 @@ public class TweetController {
 
         return tweets.delete(id);
     }
-
-
-
 }

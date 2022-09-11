@@ -18,9 +18,11 @@ public class TweetDAO {
     public Tweet create(String author, String topic, String message) {
 
         long id = counter.incrementAndGet();
+
         Tweet tweet = new Tweet(id, author, topic, message);
 
         tweets.put(id,tweet);
+
         return tweet;
     }
 
@@ -29,6 +31,7 @@ public class TweetDAO {
         Tweet tweet = tweets.get(id);
 
         tweets.put(id,tweet);
+
         return tweet;
     }
 
