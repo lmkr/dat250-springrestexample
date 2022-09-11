@@ -22,23 +22,42 @@ public class TweetController {
 
     @GetMapping("/tweet/{id}")
     public Tweet getTweet(@PathVariable Long id) {
-        return tweets.read(id);
+
+        Tweet tweet = tweets.read(id);
+
+        if (tweet == null) {
+            throw new TweetNotFoundException(id);
+        }
+
+        return tweet;
     }
 
     @PutMapping("/tweet/{id}")
     Tweet updateTweet(@RequestBody Tweet newTweet, @PathVariable Long id) {
 
-        return tweets.update(id,newTweet);
+        Tweet tweet = tweets.update(id,newTweet);
+
+        if (tweet == null) {
+            throw new TweetNotFoundException(id);
+        }
+
+        return tweet;
     }
 
     @PostMapping("/tweet")
-    Tweet newEmployee(@RequestBody Tweet newTweet) {
+    Tweet newTweet(@RequestBody Tweet newTweet) {
         return tweets.create(newTweet.getAuthor(),newTweet.getTopic(),newTweet.getMessage());
     }
 
     @DeleteMapping("/tweet/{id}")
     Tweet deleteTweet(@PathVariable Long id) {
 
-        return tweets.delete(id);
+        Tweet tweet = tweets.delete(id);
+
+        if (tweet == null) {
+            throw new TweetNotFoundException(id);
+        }
+
+        return tweet;
     }
 }

@@ -36,9 +36,11 @@ public class TweetDAO {
 
         Tweet tweet = tweets.get(id);
 
-        tweet.setTopic(newTweet.getTopic());
-        tweet.setAuthor(newTweet.getAuthor());
-        tweet.setMessage(newTweet.getMessage());
+        if (tweet != null) {
+            tweet.setTopic(newTweet.getTopic());
+            tweet.setAuthor(newTweet.getAuthor());
+            tweet.setMessage(newTweet.getMessage());
+        }
 
         return tweet;
     }
