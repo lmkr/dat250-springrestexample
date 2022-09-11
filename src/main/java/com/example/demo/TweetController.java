@@ -28,13 +28,7 @@ public class TweetController {
     @PutMapping("/tweet/{id}")
     Tweet updateTweet(@RequestBody Tweet newTweet, @PathVariable Long id) {
 
-        Tweet tweet = tweets.read(id);
-
-        tweet.setTopic(newTweet.getTopic());
-        tweet.setAuthor(newTweet.getAuthor());
-        tweet.setMessage(newTweet.getMessage());
-
-        return tweet;
+        return tweets.update(id,newTweet);
     }
 
     @PostMapping("/tweet")

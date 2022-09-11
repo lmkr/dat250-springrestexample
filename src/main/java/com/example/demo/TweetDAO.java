@@ -12,7 +12,6 @@ public class TweetDAO {
     public TweetDAO() {
        counter = new AtomicLong();
        tweets = new ConcurrentHashMap<Long, Tweet>();
-       // create("lars","topic","message");
     }
 
     public Tweet create(String author, String topic, String message) {
@@ -30,20 +29,18 @@ public class TweetDAO {
 
         Tweet tweet = tweets.get(id);
 
-        tweets.put(id,tweet);
-
         return tweet;
     }
 
-    public boolean update(Long id, String author, String topic, String message) {
+    public Tweet update(Long id, Tweet newTweet) {
 
         Tweet tweet = tweets.get(id);
 
-        tweet.setTopic(topic);
-        tweet.setAuthor(author);
-        tweet.setAuthor(message);
+        tweet.setTopic(newTweet.getTopic());
+        tweet.setAuthor(newTweet.getAuthor());
+        tweet.setMessage(newTweet.getMessage());
 
-        return true; // TODO: add error handling
+        return tweet;
     }
 
     public Tweet delete(Long id) {
@@ -56,5 +53,4 @@ public class TweetDAO {
     public Collection<Tweet> all() {
         return tweets.values();
     }
-
 }
